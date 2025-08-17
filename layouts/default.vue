@@ -75,7 +75,7 @@
         <p class="text-black text-sm text-bold text-serif">{{ time.hr }}:{{ time.min }}:{{ time.sec
             }}
         </p>
-        <Icon color="black" icon="mdiMenu" size="50px" />
+        <!-- <Icon color="black" icon="mdiMenu" size="50px" />
         <input class="h-8 ring-1 ring-gray-400 focus:ring-cyan-300  outline-0 rounded-lg px-2 w-full"
             placeholder="Search here" type="text" />
         <button @click="login_fn"
@@ -93,7 +93,7 @@
         </NuxtLink>
         <NuxtLink to="/Contact-Us" class="routes">
             Contact us
-        </NuxtLink> --> -->
+        </NuxtLink> --> --> -->
         <q-page-container>
             <q-page class="flex flex-center">
                 <NuxtPage />
@@ -164,7 +164,6 @@
 </q-scroll-area>
 </q-drawer> -->
 <script setup>
-import { laFacebook } from '@quasar/extras/line-awesome';
 import { ref, onBeforeMount } from 'vue';
 const drawer = ref(false);
 const api = useNuxtApp().$axios;
