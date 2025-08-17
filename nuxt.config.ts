@@ -1,5 +1,7 @@
 // nuxt.config.ts
 export default defineNuxtConfig({
+  ssr: false, // disables SSR
+  target: 'static', // ensure
   app: {
     head: {
       script: [
