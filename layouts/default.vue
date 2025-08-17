@@ -1,7 +1,7 @@
 <template>
     <q-layout view="hHh Lpr lff" class="h-screen">
         <q-header class="bg-black">
-            <div class="m-4 flex flex-center">
+            <div class="m-1 ring-1 ring-gray-300 ring-offset-1 flex flex-center">
                 <q-card>
                     <img src="/public/codecalistenia.jpg" class="shadow-8 ring-2 ring-gray-500 rounded-lg" />
                 </q-card>
