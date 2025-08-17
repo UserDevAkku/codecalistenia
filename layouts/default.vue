@@ -7,42 +7,44 @@
                 </q-card>
             </div>
             <q-toolbar
-                :class="[isDark ? 'bg-[#61641d] text-white' : 'bg-[white] text-black', 'cursor-pointer flex flex-center']">
-                <q-bar class="w-full ring-2 ring-cyan-400 bg-black">
-                    <Icon @click="drawer = !drawer" icon="mdiMenu" size="30px" />
-                    <q-btn dense flat :icon="fabApple" />
-                    <div class="text-weight-bold">
-                        App
+                :class="[isDark ? 'bg-[#61641d] text-white' : 'bg-[white] text-black', 'cursor-pointer flex flex-center p-0']">
+                <q-bar class="col-12 col-md-12 ring-2 ring-cyan-400 bg-black row justify-between">
+                    <div class="col-3  col-10  col-md-2 bg-white">
+                        <q-btn @click="drawer = !drawer" icon="mdi-menu" size="30px" color="black" />
                     </div>
-                    <q-space />
-                    <q-list class="grid grid-cols-6 list-none place-items-center q-mx-md">
-                        <li><q-btn round flat dense class="p-0" :icon="isPC ? 'mdi-laptop' : 'mdi-cellphone-basic'"
-                                color="white" />
-                        </li>
-                        <li><q-btn round flat dense class="p-0" :icon="isOnline ? 'mdi-wifi' : 'mdi-web-remove'"
-                                color="white" />
-                        </li>
-                        <li>
-                            <q-btn id="whatsapp" round flat dense class="p-0 text-bold" icon="mdi-whatsapp"
-                                color="green" @click="socialMedias_handler('whatsapp');" />
-                        </li>
-                        <li>
-                            <q-btn id="instagram" round flat dense class="p-0 text-bold" icon="mdi-instagram"
-                                color="red" @click="socialMedias_handler('instagram');" />
-                        </li>
-                        <li>
-                            <q-btn id="facebook" round flat dense class="p-0 text-bold" icon="mdi-facebook" color="blue"
-                                @click="socialMedias_handler('facebook');" />
-                        </li>
-                        <li class="flex flex-col-reverse flex-center h-4 w-2 gap-1 text-[.5rem] rounded-bl-md rounded-br-md">
-                            <span :class="[battery.chargingStatus ? 'battery' : 'bg-yellow ring-2 ring-gray-700']"
-                                :style="{ height: battery.batteryPercentage + '%' }">
-                                <img v-if="battery.chargingStatus" src="/assets/bg/flash.png"
-                                    class="relative bottom-1 h-2 object-cover object-center" />
-                            </span>
-                            <span>{{ battery.batteryPercentage + '' + '%' }}</span>
-                        </li>
-                    </q-list>
+                    <q-space/>
+                        <q-list class="col-4  grid grid-cols-7 list-none place-items-center">
+                            <li class="text-white text-sm">{{ time.hr }}:{{ time.min }}:{{ time.sec
+                            }}
+                            </li>
+                            <li><q-btn round flat dense class="p-0" :icon="isPC ? 'mdi-laptop' : 'mdi-cellphone-basic'"
+                                    color="white" />
+                            </li>
+                            <li><q-btn round flat dense class="p-0" :icon="isOnline ? 'mdi-wifi' : 'mdi-web-remove'"
+                                    color="white" />
+                            </li>
+                            <li>
+                                <q-btn id="whatsapp" round flat dense class="p-0 text-bold" icon="mdi-whatsapp"
+                                    color="green" @click="socialMedias_handler('whatsapp');" />
+                            </li>
+                            <li>
+                                <q-btn id="instagram" round flat dense class="p-0 text-bold" icon="mdi-instagram"
+                                    color="red" @click="socialMedias_handler('instagram');" />
+                            </li>
+                            <li>
+                                <q-btn id="facebook" round flat dense class="p-0 text-bold" icon="mdi-facebook"
+                                    color="blue" @click="socialMedias_handler('facebook');" />
+                            </li>
+                            <li v-if="battery.batteryPercentage"
+                                class="flex flex-col-reverse  h-4 w-2 gap-1 text-[.5rem] rounded-bl-md rounded-br-md ring-1 ring-white">
+                                <div :class="[battery.chargingStatus ? 'battery' : 'bg-white', 'rounded-bl-md rounded-br-md w-2']"
+                                    :style="{ height: battery.batteryPercentage + '%' }">
+                                    <img v-if="battery.chargingStatus" src="/assets/bg/flash.png"
+                                        class="relative top-1 h-2 object-cover object-center" />
+                                </div>
+                                <span>{{ battery.batteryPercentage + '' + '%' }}</span>
+                            </li>
+                        </q-list>
                 </q-bar>
                 <!-- <q-toolbar-title @click="redirectTo_Home" class="text-shadow-lg">codecalistenia.com</q-toolbar-title> -->
             </q-toolbar>
@@ -52,7 +54,6 @@
             :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
             <q-scroll-area class="fit">
                 <q-list>
-
                     <template v-for="(menuItem, index) in menuList" :key="index">
                         <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
                             <q-item-section avatar>
@@ -72,9 +73,6 @@
         <Icon color="black" v-if="!isOnline" icon="mdiWebRemove" size="15px" class="text-bold" />
         <Icon color="blue" v-if="isPC" icon="mdiMicrosoftWindows" size="20px" class="text-bold" />
         <Icon color="black" v-if="isMobile" icon="mdiCellphoneBasic" size="20px" class="text-bold" />
-        <p class="text-black text-sm text-bold text-serif">{{ time.hr }}:{{ time.min }}:{{ time.sec
-            }}
-        </p>
         <!-- <Icon color="black" icon="mdiMenu" size="50px" />
         <input class="h-8 ring-1 ring-gray-400 focus:ring-cyan-300  outline-0 rounded-lg px-2 w-full"
             placeholder="Search here" type="text" />

@@ -1,4 +1,11 @@
 {
   "css.validate": false,
-  "volar.takeOverMode.enabled": true
+  "volar.takeOverMode.enabled": true,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#29ff1e",    // active window color
+    "titleBar.activeForeground": "#020000f7",    // text/icons color
+    "titleBar.inactiveBackground": "#466db4",  // inactive window color
+    "titleBar.inactiveForeground": "#DDDDDD"   // inactive text/icons color
+}
+
 }
