@@ -1,0 +1,6 @@
+git checkout main
+git push origin main:master
+git branch --set-upstream-to=origin/master main
+git add .
+git commit -m "Your update message"
+git push  # pushes local main to remote master automatically

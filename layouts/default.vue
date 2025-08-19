@@ -15,8 +15,7 @@
                     </span>
                 </div>
                 <div
-                    :class="[deviceInfo.pc ? 'bg-[#1e2224] ring-1 border-spacing-9 border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4  ring-inset-4 ring-1 bg-[#000047]', 'p-3 gap-x-2 gap-2 flex flex-center  rounded-tl-2xl rounded-tr-2xl']">
-                    <Icon icon="mdiClock" class="text-xs sm:text-sm md:text-base lg:text-lg"
+                    :class="[deviceInfo.pc ? 'bg-[rgb(201,205,207)] ring-1 border-spacing-9  border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4   ring-inset-4 ring-1 bg-[#000047]', 'p-2 gap-x-1 gap-1 flex flex-center rounded-tl-2xl rounded-tr-2xl']                    <Icon icon="mdiClock" class="text-xs sm:text-sm md:text-base lg:text-lg"
                         :color="deviceInfo.pc ? 'black' : 'green'" />
                     <span
                         :class="[deviceInfo.pc ? 'text-red' : 'text-white', 'text-bold  text-sm sm:text-sm md:text-base lg:text-lg']">{{
