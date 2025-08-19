@@ -6,26 +6,27 @@
                     :class="[deviceInfo.pc ? 'bg-[rgb(201,205,207)] ring-1 border-spacing-9  border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4   ring-inset-4 ring-1 bg-[#000047]', 'p-2 gap-x-1 gap-1 flex flex-center rounded-tl-2xl rounded-tr-2xl']">
                     <Icon :icon="[deviceInfo.pc ? 'mdiMicrosoftWindows' : 'mdiCellphone']"
                         :color="[deviceInfo.pc ? 'brown' : 'cyan']"
-                        class="text-xs sm:text-sm md:text-base lg:text-lg" />
-                    <Icon icon="mdiCalendarMonth" color="red" class="text-xs sm:text-sm md:text-base lg:text-lg" />
+                        class="text-lg sm:text-lg md:text-lg lg:text-2xl" />
+                    <Icon icon="mdiCalendarMonth" color="red" class="text-lg sm:text-lg md:text-lg lg:text-2xl" />
                     <span
-                        :class="[deviceInfo.pc ? 'text-black' : 'text-pink-500', 'font-sans text-bold text-xs sm:text-sm md:text-base lg:text-lg']">
+                        :class="[deviceInfo.pc ? 'text-black' : 'text-pink-500', 'font-sans text-bold text-lg sm:text-lg md:text-lg lg:text-2xl']">
                         {{ calender.days[calenderDataHandlers.day] }},{{ ' ' }}{{ calender.date }}{{
                             calender.months[calenderDataHandlers.month] }}{{ calender.year }}
                     </span>
                 </div>
-                <div
-                    :class="[deviceInfo.pc ? 'bg-[rgb(201,205,207)] ring-1 border-spacing-9  border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4   ring-inset-4 ring-1 bg-[#000047]', 'p-2 gap-x-1 gap-1 flex flex-center rounded-tl-2xl rounded-tr-2xl']                    <Icon icon="mdiClock" class="text-xs sm:text-sm md:text-base lg:text-lg"
+                 <div
+                    :class="[deviceInfo.pc ? 'bg-[rgb(201,205,207)] ring-1 border-spacing-9  border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4   ring-inset-4 ring-1 bg-[#000047]', 'p-2 gap-x-1 gap-1 flex flex-center rounded-tl-2xl rounded-tr-2xl']">
+                    <Icon icon="mdiClock" class="text-lg sm:text-lg md:text-lg lg:text-2xl"
                         :color="deviceInfo.pc ? 'black' : 'green'" />
                     <span
-                        :class="[deviceInfo.pc ? 'text-red' : 'text-white', 'text-bold  text-sm sm:text-sm md:text-base lg:text-lg']">{{
+                        :class="[deviceInfo.pc ? 'text-red' : 'text-white', 'text-bold  text-lg sm:text-lg md:text-lg lg:text-2xl']">{{
                             time.hr }}:{{
                             time.min }}:{{
                             time.sec
                         }}</span>
 
                     <Icon :icon="deviceInfo.internet ? 'mdiWifiStrength4' : 'mdiWebRemove'"
-                        :color="deviceInfo.pc ? 'blue' : 'yellow'" class="text-xs sm:text-sm md:text-base lg:text-lg" />
+                        :color="deviceInfo.pc ? 'blue' : 'yellow'" class="text-lg sm:text-lg md:text-lg lg:text-2xl" />
                     <div
                         :class="[deviceInfo.pc ? 'h-8 w-5 ring-2' : 'h-4 ring-1 w-2', 'flex flex-col-reverse  bg-[#000047]  ring-gray-400 ring-offset rounded-bl-sm rounded-br-sm']">
                         <div :class="[deviceInfo.pc ? 'battery' : 'bg-[#00ffff]', 'w-5 rounded-bl-sm rounded-br-sm relative']"
@@ -81,6 +82,7 @@
         </NuxtLink> --> --> -->
         <q-page-container>
             <q-page class="flex flex-center">
+                <h1>hello</h1>
                 <ClockSoundEnabler :isEnable="isEnable" @update:isEnable="close_popup" />
                 <NuxtPage />
             </q-page>
@@ -121,7 +123,7 @@
         </div>
         </q-bar>
         <q-toolbar
-            class="flex justify-evenly text-sm sm:text-md md:text-base lg:text-lg text-bold text-[#696969] font-sans ">
+            class="flex justify-evenly text-lg sm:text-md md:text-lg lg:text-2xl text-bold text-[#696969] font-sans ">
             <Icon icon="mdiMenu" @click="drawer = !drawer" color="black" size="40px" />
             <div class="w-[100%] flex flex-center justify-evenly">
                 <NuxtLink to="/auth/login" class="routes">
