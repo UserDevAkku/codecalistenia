@@ -305,7 +305,7 @@ const Controller = () => {
                 deviceInfo.value.battery.level = Math.round(batteryInfo.level * 100);
                 deviceInfo.value.battery.charging_status = batteryInfo.charging;
                 deviceInfo.value.pc = navigator.userAgent.match(/\b(Windows|Mobile)\b/)[0] === "Windows" ? "true" : "false";
-                alert(deviceInfo.value.pc,navigator.userAgent.match(/\b(Windows|Mobile)\b/)[0]);
+                alert(deviceInfo.value.pc,navigator.userAgent);
             })
         }, 1000);
     }
