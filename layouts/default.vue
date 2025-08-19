@@ -4,7 +4,7 @@
             <q-bar :class="[deviceInfo.pc ? 'h-24 p-4 bg-[#C9CDCF]' : 'h-14 p-1 bg-[#000047]', 'row justify-between']">
                 <div
                     :class="[deviceInfo.pc ? 'bg-[rgb(201,205,207)] ring-1 border-spacing-9  border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4   ring-inset-4 ring-1 bg-[#000047]', 'p-2 gap-x-1 gap-1 flex flex-center rounded-tl-2xl rounded-tr-2xl']">
-                    <Icon :icon="[deviceInfo.pc ? 'mdiMicrosoftWindows' : 'mdiCellphone']"
+                    <Icon :icon="deviceInfo.pc ? 'mdiMicrosoftWindows' :!deviceInfo.pc?'mdiCellphone':''"
                         :color="[deviceInfo.pc ? 'brown' : 'cyan']"
                         class="text-lg sm:text-lg md:text-lg lg:text-2xl" />
                     <Icon icon="mdiCalendarMonth" color="red" class="text-lg sm:text-lg md:text-lg lg:text-2xl" />
