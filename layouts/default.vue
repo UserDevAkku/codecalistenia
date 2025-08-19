@@ -87,7 +87,7 @@
                 <NuxtPage />
             </q-page>
         </q-page-container>
-        <q-footer class="bg-white p-2 shadow-5 border-l-cyan-600 rounded-tl-2xl rounded-tr-2xl border-r-cyan-600 ">
+        <!-- <q-footer class="bg-white p-2 shadow-5 border-l-cyan-600 rounded-tl-2xl rounded-tr-2xl border-r-cyan-600 ">
             <q-toolbar class="flex flex-center h-5">
                 <q-list class="list-none flex flex-center space-x-6 w-full relative">
                     <li>
@@ -104,7 +104,7 @@
                     </li>
                 </q-list>
             </q-toolbar>
-        </q-footer>
+        </q-footer> -->
     </q-layout>
 </template>
 
