@@ -1,78 +1,63 @@
 <template>
-    <q-layout view="hHh Lpr lff" class="h-screen">
-        <q-header class="bg-black">
-            <div class="m-1 ring-1 ring-gray-300 ring-offset-1 flex flex-center">
-                <q-card>
-                    <img src="/public/codecalistenia.jpg" class="shadow-8 ring-2 ring-gray-500 rounded-lg" />
-                </q-card>
-            </div>
-            <q-toolbar
-                :class="[isDark ? 'bg-[#61641d] text-white' : 'bg-[white] text-black', 'cursor-pointer flex flex-center p-0']">
-                <q-bar class="col-12 col-md-12 ring-2 ring-cyan-400 bg-black row justify-between">
-                    <div class="col-3  col-10  col-md-2 bg-white">
-                        <q-btn @click="drawer = !drawer" icon="mdi-menu" size="30px" color="black" />
+    <q-layout v-if="hideThepage" class="h-full">
+        <q-header :class="[!deviceInfo.pc ? 'bg-yellow' : 'bg-black', 'h-[100px]']">
+            <q-bar :class="[deviceInfo.pc ? 'h-24 p-4 bg-[#C9CDCF]' : 'h-14 p-1 bg-[#000047]', 'row justify-between']">
+                <div
+                    :class="[deviceInfo.pc ? 'bg-[#C9CDCF] ring-1 border-spacing-9  border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4   ring-inset-4 ring-1 bg-[#000047]', 'p-2 gap-x-1 gap-1 flex flex-center rounded-tl-2xl rounded-tr-2xl']">
+                    <Icon :icon="[deviceInfo.pc ? 'mdiMicrosoftWindows' : 'mdiCellphone']"
+                        :color="[deviceInfo.pc ? 'brown' : 'cyan']" :size="deviceInfo.pc ? '3rem' : '2rem'" />
+                    <Icon icon="mdiCalendarMonth" color="red" :size="[deviceInfo.pc?'3rem':'1.3rem']" />
+                    <span :class="[deviceInfo.pc?'text-black':'text-pink-500', 'font-sans text-bold text-[.67rem] lg:text-base']">
+                        {{ calender.days[calenderDataHandlers.day] }},{{' '}}{{ calender.date }}{{
+                            calender.months[calenderDataHandlers.month] }}{{ calender.year }}
+                    </span>
+                </div>
+                <div
+                    :class="[deviceInfo.pc ? 'bg-[#C9CDCF] ring-1 border-spacing-9 border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4  ring-inset-4 ring-1 bg-[#000047]', 'p-3 gap-x-2 gap-2 flex flex-center  rounded-tl-2xl rounded-tr-2xl']">
+                    <Icon icon="mdiClock" :size="deviceInfo.pc ? '3rem' : '1.6rem'"
+                        :color="deviceInfo.pc ? 'black' : 'green'" class="cursor-pointer" />
+                    <span
+                        :class="[deviceInfo.pc ? 'text-red' : 'text-white', 'text-bold  text-sm sm:text-sm md:text-base lg:text-lg']">{{
+                            time.hr }}:{{
+                            time.min }}:{{
+                            time.sec
+                        }}</span>
+
+                    <Icon :icon="deviceInfo.internet ? 'mdiWifiStrength4' : 'mdiWebRemove'" :color="deviceInfo.pc?'blue':'yellow'" :size="[deviceInfo.pc?'3rem':'1.5rem']" />
+                    <div
+                        :class="[deviceInfo.pc?'h-8 w-5 ring-2' :'h-4 ring-1 w-2','flex flex-col-reverse  bg-[#000047]  ring-gray-400 ring-offset rounded-bl-sm rounded-br-sm'] ">
+                        <div :class="[deviceInfo.pc ? 'battery' : 'bg-[#00ffff]', 'w-5 rounded-bl-sm rounded-br-sm relative']"
+                            :style="{ height: deviceInfo.battery.level + '%' }">
+                            <img v-if="deviceInfo.battery.charging_status === true" src="/assets/bg/flash.png"
+                                class="absolute h-3 bottom-2 right-1" />
+                        </div>
                     </div>
-                    <q-space/>
-                        <q-list class="col-4  grid grid-cols-7 list-none place-items-center">
-                            <li class="text-white text-sm">{{ time.hr }}:{{ time.min }}:{{ time.sec
-                            }}
-                            </li>
-                            <li><q-btn round flat dense class="p-0" :icon="isPC ? 'mdi-laptop' : 'mdi-cellphone-basic'"
-                                    color="white" />
-                            </li>
-                            <li><q-btn round flat dense class="p-0" :icon="isOnline ? 'mdi-wifi' : 'mdi-web-remove'"
-                                    color="white" />
-                            </li>
-                            <li>
-                                <q-btn id="whatsapp" round flat dense class="p-0 text-bold" icon="mdi-whatsapp"
-                                    color="green" @click="socialMedias_handler('whatsapp');" />
-                            </li>
-                            <li>
-                                <q-btn id="instagram" round flat dense class="p-0 text-bold" icon="mdi-instagram"
-                                    color="red" @click="socialMedias_handler('instagram');" />
-                            </li>
-                            <li>
-                                <q-btn id="facebook" round flat dense class="p-0 text-bold" icon="mdi-facebook"
-                                    color="blue" @click="socialMedias_handler('facebook');" />
-                            </li>
-                            <li v-if="battery.batteryPercentage"
-                                class="flex flex-col-reverse  h-4 w-2 gap-1 text-[.5rem] rounded-bl-md rounded-br-md ring-1 ring-white">
-                                <div :class="[battery.chargingStatus ? 'battery' : 'bg-white', 'rounded-bl-md rounded-br-md w-2']"
-                                    :style="{ height: battery.batteryPercentage + '%' }">
-                                    <img v-if="battery.chargingStatus" src="/assets/bg/flash.png"
-                                        class="relative top-1 h-2 object-cover object-center" />
-                                </div>
-                                <span>{{ battery.batteryPercentage + '' + '%' }}</span>
-                            </li>
-                        </q-list>
-                </q-bar>
-                <!-- <q-toolbar-title @click="redirectTo_Home" class="text-shadow-lg">codecalistenia.com</q-toolbar-title> -->
+                </div>
+            </q-bar>
+            <q-toolbar>
+                <Icon flat @click="drawer = !drawer" round dense icon="menu" />
+                <q-toolbar-title>Header</q-toolbar-title>
             </q-toolbar>
         </q-header>
-
-        <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="500" bordered
+        <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="500"
             :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
             <q-scroll-area class="fit">
-                <q-list>
+                <q-list class="flex flex-center bg-red">
                     <template v-for="(menuItem, index) in menuList" :key="index">
-                        <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
-                            <q-item-section avatar>
-                                <q-icon :name="menuItem.icon" />
-                            </q-item-section>
-                            <q-item-section>
-                                {{ menuItem.label }}
-                            </q-item-section>
-                        </q-item>
+                        <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple></q-item>
+                        <q-item-section avatar>
+                            <q-icon :name="menuItem.icon" />
+                        </q-item-section>
+                        <q-item-section>
+                            {{ menuItem.label }}
+                        </q-item-section>
+
                         <q-separator :key="'sep' + index" v-if="menuItem.separator" />
                     </template>
 
                 </q-list>
             </q-scroll-area>
         </q-drawer>
-        <Icon color="black" v-if="isOnline" icon="mdiWifi" size="15px" class="text-bold" />
-        <Icon color="black" v-if="!isOnline" icon="mdiWebRemove" size="15px" class="text-bold" />
-        <Icon color="blue" v-if="isPC" icon="mdiMicrosoftWindows" size="20px" class="text-bold" />
-        <Icon color="black" v-if="isMobile" icon="mdiCellphoneBasic" size="20px" class="text-bold" />
         <!-- <Icon color="black" icon="mdiMenu" size="50px" />
         <input class="h-8 ring-1 ring-gray-400 focus:ring-cyan-300  outline-0 rounded-lg px-2 w-full"
             placeholder="Search here" type="text" />
@@ -94,9 +79,28 @@
         </NuxtLink> --> --> -->
         <q-page-container>
             <q-page class="flex flex-center">
+                <ClockSoundEnabler :isEnable="isEnable" @update:isEnable="close_popup" />
                 <NuxtPage />
             </q-page>
         </q-page-container>
+        <q-footer class="bg-white p-2 shadow-5 border-l-cyan-600 rounded-tl-2xl rounded-tr-2xl border-r-cyan-600 ">
+            <q-toolbar class="flex flex-center h-5">
+                <q-list class="list-none flex flex-center space-x-6 w-full relative">
+                    <li>
+                        <Icon id="instagram" class="p-0 text-bold" icon="mdiInstagram" color="red"
+                            @click="handleSocialnetworks('instagram');" size="1.5rem" />
+                    </li>
+                    <li>
+                        <Icon id="facebook" class="p-0 text-bold" icon="mdiFacebook" color="blue"
+                            @click="handleSocialnetworks('facebook');" size="1.5rem" />
+                    </li>
+                    <li :class="[deviceInfo.pc ? 'absolute right-1 bottom-8' : 'absolute right-1 bottom-14']">
+                        <Icon id="instagram" class="p-0 text-bold" icon="mdiWechat" color="green"
+                            @click="handleSocialnetworks('whatsapp');" :size="deviceInfo.pc ? '4rem' : '3rem'" />
+                    </li>
+                </q-list>
+            </q-toolbar>
+        </q-footer>
     </q-layout>
 </template>
 
@@ -144,7 +148,7 @@
         <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="500" bordered
             :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
             <q-scroll-area class="fit">
-                <q-list>
+                <q-list class="flex flex-center bg-red">
 
                     <template v-for="(menuItem, index) in menuList" :key="index">
                         <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
@@ -154,50 +158,69 @@
                             <q-item-section>
                                 {{ menuItem.label }}
                             </q-item-section>
-                        </q-item>
+                        
                         <q-separator :key="'sep' + index" v-if="menuItem.separator" />
                     </template>
-
 </q-list>
 </q-scroll-area>
 </q-drawer> -->
 <script setup>
-import { ref, onBeforeMount } from 'vue';
-const drawer = ref(false);
-const api = useNuxtApp().$axios;
-const battery = ref({
-    batteryPercentage: "",
-    chargingStatus: "",
-});
-const id = ref({
-    whatsapp: null,
-    instagram: null,
-    facebook: null,
-})
-const isDark = ref(true);
-const isPC = ref(null);
-const isMobile = ref(null);
-const isOnline = ref(null);
-const time = ref({
-    hr: null,
-    min: null,
-    sec: null,
-});
+import { ref, watch, onBeforeMount, onBeforeUnmount, onMounted } from 'vue';
 
-const socialMedias_handler = (button) => {
-    if (process.client) {
-        if (button === 'whatsapp') {
-            window.open('https://wa.me/919818728946', '_blank');
-        }
-        if (button === 'instagram') {
-            window.open('https://instagram.com/aakash.cali', '_blank');
-        }
-        if (button === 'facebook') {
-            window.open('https://www.facebook.com/profile.php?id=739760575888369');
-        }
 
-    }
+import { useQuasar, QSpinnerFacebook } from 'quasar';
+
+const isEnable = ref(false);
+
+const close_popup = (updatedValue) => {
+    isEnable.value = updatedValue;
 }
+
+const hideThepage = ref(false);
+
+
+const $q = useQuasar();
+
+const drawer = ref(false);
+
+const api = useNuxtApp().$axios;
+
+const socialNetworks = ref({
+    whatsapp: null,
+    facebook: null,
+    instagram: null,
+})
+
+
+const deviceInfo = ref({
+    pc: null,
+    internet: null,
+    battery: {
+        level: '',
+        charging_status: null,
+    }
+})
+
+let calenderDataHandlers = {
+    day: null,
+    month: null,
+}
+const calender = ref({
+    date: null,
+    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    months: [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"],
+    year: null,
+})
+
+const time = ref({
+    hr: '',
+    min: '',
+    sec: '',
+})
+
+
 const menuList = [
     {
         icon: 'inbox',
@@ -236,122 +259,94 @@ const menuList = [
         separator: false
     }
 ]
-const redirectTo_Home = () => {
-    navigateTo('/');
-}
-const login_fn = () => {
-    navigateTo('/auth/login');
-}
-/*******************************/
-const startWatch = () => {
+
+const handleSocialnetworks = (button) => {
     if (process.client) {
-        setInterval(() => {
+        if (button === 'whatsapp') {
+            window.open('https://wa.me/919818728946', '_blank');
+        }
+        if (button === 'instagram') {
+            window.open('https://instagram.com/aakash.cali', '_blank');
+        }
+        if (button === 'facebook') {
+            window.open('https://www.facebook.com/profile.php?id=739760575888369');
+        }
+    }
+}
+
+const redirectTo = (btn) => {
+    if (btn === "company_logo") return navigateTo('/')
+    if (btn === "login_btn") return navigateTo('/auth/login');
+}
+
+
+let controller_id = null;
+const Controller = () => {
+    if (process.client) {
+        controller_id = setInterval(() => {
             const now = new Date();
-            let hours = now.getHours();
-            hours = hours % 12;
-            hours = hours === 0 ? 12 : hours;
-            time.value.hr = hours;
-            time.value.min = now.getMinutes();
+            /* TIME */
+            let hours = now.getHours() % 12;
+            time.value.hr = hours === 0 ? 12 : hours;
+            time.value.min = String(now.getMinutes()).padStart(2,0);
             time.value.sec = String(now.getSeconds()).padStart(2, 0);
-        }, 1)
+            /* CALENDER */
+            calenderDataHandlers.day = now.getDay();
+            calenderDataHandlers.month = now.getMonth();
+            calender.value.year = now.getFullYear();
+            calender.value.date = now.getDate();
+            /* DEVICE_INFO */
+            deviceInfo.value.internet = navigator.onLine;
+            navigator.getBattery().then((batteryInfo) => {
+                deviceInfo.value.battery.level = Math.round(batteryInfo.level * 100);
+                deviceInfo.value.battery.charging_status = batteryInfo.charging;
+                deviceInfo.value.pc = navigator.userAgent.match(/\b(Windows|Mobile)\b/)[0] === "Windows" ? "true" : "false";
+            })
+        }, 1000);
     }
 }
-startWatch();
-/*******************************/
-const batteryInfo_fn = async () => {
-    if (process.client) {
-        setInterval(async () => {
-            /*  Track Charging Status */
-            let batteryInfo = await navigator.getBattery();
-            battery.value.batteryPercentage = Math.round(batteryInfo.level * 100);
-            battery.value.chargingStatus = batteryInfo.charging;
-        }, 1)
-    }
+Controller();
 
+const show_fn = () => {
+if(process.client){
+    $q.loading.show({
+        messageColor: "black",
+        spinner: QSpinnerFacebook,
+        spinnerColor: 'black',
+        spinnerSize: 60,
+        backgroundColor: 'cyan',
+        messageColor: 'white'
+    })
 }
-batteryInfo_fn();
-/*******************************/
-const phoneORPc = () => {
-    if (process.client) {
-        setInterval(() => {
-            let ua = navigator.userAgent;
-            let isMobpc = ua.match(/\b(Windows|Mobile)\b/);
-            if (isMobpc && isMobpc[0] === 'Windows') {
-                isPC.value = true;
-            }
-            else if (isMobpc && isMobpc[0] === 'Mobile') {
-                isMobile.value = true;
-            }
-        }, 1);
-    }
 }
-phoneORPc();
-/*******************************/
-const isInternetAccess = () => {
-    if (process.client) {
-        setInterval(async () => {
-            const isFound = navigator.onLine;
-            isOnline.value = isFound;
-        }, 1)
-    }
-}
-isInternetAccess();
-/*******************************/
 onBeforeMount(() => {
-    const startWatch = () => {
-        if (process.client) {
-            setInterval(() => {
-                const now = new Date();
-                let hours = now.getHours();
-                hours = hours % 12;
-                hours = hours === 0 ? 12 : hours;
-                time.value.hr = hours;
-                time.value.min = now.getMinutes();
-                time.value.sec = String(now.getSeconds()).padStart(2, 0);
-            }, 1)
-        }
+    if (process.client) {
+        show_fn();
+        Controller();
     }
-    startWatch();
-    /*******************************/
-    const batteryInfo_fn = async () => {
-        if (process.client) {
-            setInterval(async () => {
-                /*  Track Charging Status */
-                let batteryInfo = await navigator.getBattery();
-                battery.value.batteryPercentage = Math.round(batteryInfo.level * 100);
-                battery.value.chargingStatus = batteryInfo.charging;
-            }, 1)
-        }
+});
 
-    }
-    batteryInfo_fn();
-    /*******************************/
-    const phoneORPc = () => {
-        if (process.client) {
-            setInterval(() => {
-                let ua = navigator.userAgent;
-                let isMobpc = ua.match(/\b(Windows|Mobile)\b/);
-                if (isMobpc && isMobpc[0] === 'Windows') {
-                    isPC.value = true;
-                }
-                else if (isMobpc && isMobpc[0] === 'Mobile') {
-                    isMobile.value = true;
-                }
-            }, 1);
+
+let hideLoder_timerID = null;
+onMounted(() => {
+if(process.client){
+    hideLoder_timerID = setTimeout(() => {
+        $q.loading.hide();
+        hideThepage.value = true;
+        }, 3000);
+        isEnable.value = true;
+        
         }
-    }
-    phoneORPc();
-    /*******************************/
-    const isInternetAccess = () => {
-        if (process.client) {
-            setInterval(async () => {
-                const isFound = navigator.onLine;
-                isOnline.value = isFound;
-            }, 1)
-        }
-    }
-    isInternetAccess();
-})
+});
+
+
+onBeforeUnmount(() => {
+if(process.client){
+}
+    if (hideLoder_timerID) clearTimeout(hideLoder_timerID), hideLoder_timerID = null;
+});
+
+
 </script>
 
 <style scoped>
@@ -361,5 +356,9 @@ onBeforeMount(() => {
 
 .routes:hover {
     color: black;
+}
+
+.shadow {
+    box-shadow: 0 0 2px white;
 }
 </style>
