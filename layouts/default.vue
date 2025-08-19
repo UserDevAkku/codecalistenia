@@ -3,19 +3,21 @@
         <q-header :class="[!deviceInfo.pc ? 'bg-yellow' : 'bg-black', 'h-[100px]']">
             <q-bar :class="[deviceInfo.pc ? 'h-24 p-4 bg-[#C9CDCF]' : 'h-14 p-1 bg-[#000047]', 'row justify-between']">
                 <div
-                    :class="[deviceInfo.pc ? 'bg-[#C9CDCF] ring-1 border-spacing-9  border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4   ring-inset-4 ring-1 bg-[#000047]', 'p-2 gap-x-1 gap-1 flex flex-center rounded-tl-2xl rounded-tr-2xl']">
+                    :class="[deviceInfo.pc ? 'bg-[rgb(201,205,207)] ring-1 border-spacing-9  border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4   ring-inset-4 ring-1 bg-[#000047]', 'p-2 gap-x-1 gap-1 flex flex-center rounded-tl-2xl rounded-tr-2xl']">
                     <Icon :icon="[deviceInfo.pc ? 'mdiMicrosoftWindows' : 'mdiCellphone']"
-                        :color="[deviceInfo.pc ? 'brown' : 'cyan']" :size="deviceInfo.pc ? '3rem' : '2rem'" />
-                    <Icon icon="mdiCalendarMonth" color="red" :size="[deviceInfo.pc?'3rem':'1.3rem']" />
-                    <span :class="[deviceInfo.pc?'text-black':'text-pink-500', 'font-sans text-bold text-[.67rem] lg:text-base']">
-                        {{ calender.days[calenderDataHandlers.day] }},{{' '}}{{ calender.date }}{{
+                        :color="[deviceInfo.pc ? 'brown' : 'cyan']"
+                        class="text-xs sm:text-sm md:text-base lg:text-lg" />
+                    <Icon icon="mdiCalendarMonth" color="red" class="text-xs sm:text-sm md:text-base lg:text-lg" />
+                    <span
+                        :class="[deviceInfo.pc ? 'text-black' : 'text-pink-500', 'font-sans text-bold text-xs sm:text-sm md:text-base lg:text-lg']">
+                        {{ calender.days[calenderDataHandlers.day] }},{{ ' ' }}{{ calender.date }}{{
                             calender.months[calenderDataHandlers.month] }}{{ calender.year }}
                     </span>
                 </div>
                 <div
-                    :class="[deviceInfo.pc ? 'bg-[#C9CDCF] ring-1 border-spacing-9 border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4  ring-inset-4 ring-1 bg-[#000047]', 'p-3 gap-x-2 gap-2 flex flex-center  rounded-tl-2xl rounded-tr-2xl']">
-                    <Icon icon="mdiClock" :size="deviceInfo.pc ? '3rem' : '1.6rem'"
-                        :color="deviceInfo.pc ? 'black' : 'green'" class="cursor-pointer" />
+                    :class="[deviceInfo.pc ? 'bg-[#1e2224] ring-1 border-spacing-9 border-2 border-black ring-white ring-inset-3  shadow-white' : 'shadow-4  ring-inset-4 ring-1 bg-[#000047]', 'p-3 gap-x-2 gap-2 flex flex-center  rounded-tl-2xl rounded-tr-2xl']">
+                    <Icon icon="mdiClock" class="text-xs sm:text-sm md:text-base lg:text-lg"
+                        :color="deviceInfo.pc ? 'black' : 'green'" />
                     <span
                         :class="[deviceInfo.pc ? 'text-red' : 'text-white', 'text-bold  text-sm sm:text-sm md:text-base lg:text-lg']">{{
                             time.hr }}:{{
@@ -23,9 +25,10 @@
                             time.sec
                         }}</span>
 
-                    <Icon :icon="deviceInfo.internet ? 'mdiWifiStrength4' : 'mdiWebRemove'" :color="deviceInfo.pc?'blue':'yellow'" :size="[deviceInfo.pc?'3rem':'1.5rem']" />
+                    <Icon :icon="deviceInfo.internet ? 'mdiWifiStrength4' : 'mdiWebRemove'"
+                        :color="deviceInfo.pc ? 'blue' : 'yellow'" class="text-xs sm:text-sm md:text-base lg:text-lg" />
                     <div
-                        :class="[deviceInfo.pc?'h-8 w-5 ring-2' :'h-4 ring-1 w-2','flex flex-col-reverse  bg-[#000047]  ring-gray-400 ring-offset rounded-bl-sm rounded-br-sm'] ">
+                        :class="[deviceInfo.pc ? 'h-8 w-5 ring-2' : 'h-4 ring-1 w-2', 'flex flex-col-reverse  bg-[#000047]  ring-gray-400 ring-offset rounded-bl-sm rounded-br-sm']">
                         <div :class="[deviceInfo.pc ? 'battery' : 'bg-[#00ffff]', 'w-5 rounded-bl-sm rounded-br-sm relative']"
                             :style="{ height: deviceInfo.battery.level + '%' }">
                             <img v-if="deviceInfo.battery.charging_status === true" src="/assets/bg/flash.png"
@@ -288,7 +291,7 @@ const Controller = () => {
             /* TIME */
             let hours = now.getHours() % 12;
             time.value.hr = hours === 0 ? 12 : hours;
-            time.value.min = String(now.getMinutes()).padStart(2,0);
+            time.value.min = String(now.getMinutes()).padStart(2, 0);
             time.value.sec = String(now.getSeconds()).padStart(2, 0);
             /* CALENDER */
             calenderDataHandlers.day = now.getDay();
@@ -308,16 +311,16 @@ const Controller = () => {
 Controller();
 
 const show_fn = () => {
-if(process.client){
-    $q.loading.show({
-        messageColor: "black",
-        spinner: QSpinnerFacebook,
-        spinnerColor: 'black',
-        spinnerSize: 60,
-        backgroundColor: 'cyan',
-        messageColor: 'white'
-    })
-}
+    if (process.client) {
+        $q.loading.show({
+            messageColor: "black",
+            spinner: QSpinnerFacebook,
+            spinnerColor: 'black',
+            spinnerSize: 60,
+            backgroundColor: 'cyan',
+            messageColor: 'white'
+        })
+    }
 }
 onBeforeMount(() => {
     if (process.client) {
@@ -329,20 +332,20 @@ onBeforeMount(() => {
 
 let hideLoder_timerID = null;
 onMounted(() => {
-if(process.client){
-    hideLoder_timerID = setTimeout(() => {
-        $q.loading.hide();
-        hideThepage.value = true;
+    if (process.client) {
+        hideLoder_timerID = setTimeout(() => {
+            $q.loading.hide();
+            hideThepage.value = true;
         }, 3000);
         isEnable.value = true;
-        
-        }
+
+    }
 });
 
 
 onBeforeUnmount(() => {
-if(process.client){
-}
+    if (process.client) {
+    }
     if (hideLoder_timerID) clearTimeout(hideLoder_timerID), hideLoder_timerID = null;
 });
 
